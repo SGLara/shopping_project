@@ -4,6 +4,6 @@ class ProductController
 {
     public function index()
     {
-        echo "Hola, soy ProductController";
+        require_once 'views/products/best.php';
     }
 }
