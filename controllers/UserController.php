@@ -1,4 +1,5 @@
 <?php
+require_once 'models/User.php';
 
 class UserController
 {
@@ -15,7 +16,7 @@ class UserController
     public function save()
     {
         if (isset($_POST)) {
-            var_dump($_POST);
+            $user = new User();
         }
     }
 }
