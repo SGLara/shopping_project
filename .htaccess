@@ -2,7 +2,7 @@
 
     #Activate 
     RewriteEngine on
-    ErrorDocument 404 http://localhost/master-php/shopping-project/error/
+    ErrorDocument 404 http://localhost/shopping-project/error/
 
     RewriteCond %{SCRIPT_FILENAME} !-d
     RewriteCond %{SCRIPT_FILENAME} !-f
