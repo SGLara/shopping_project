@@ -240,4 +240,12 @@ footer {
   border-top: 4px solid #01b1ea;
 }
 
+.alert_green {
+  color: green;
+}
+
+.alert_red {
+  color: red;
+}
+
 /*# sourceMappingURL=styles.css.map */

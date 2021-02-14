@@ -3,6 +3,7 @@ session_start();
 
 require_once 'autoload.php';
 require_once 'config/Database.php';
+require_once 'helpers/Helpers.php';
 require_once 'config/Parameters.php';
 require_once 'views/layout/header.php';
 require_once 'views/layout/sidebar.php';
