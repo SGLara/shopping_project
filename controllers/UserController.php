@@ -16,18 +16,41 @@ class UserController
             $email = isset($_POST['email']) ? $_POST['email'] : false;
             $password = isset($_POST['password']) ? $_POST['password'] : false;
 
-            if ($name && $last_name && $email && $password) {
+            // Validate info
+            $errors = array();
+
+            if (empty($name) && is_numeric($name) && preg_match("/[0-9]/", $name)) {
+                $name = false;
+                $errors['name'] = "Nombre inválido";
+            }
+
+            // Validar apellidos
+            if (empty($last_name) && is_numeric($last_name) && preg_match("/[0-9]/", $last_name)) {
+                $last_name = false;
+                $errors['last_name'] = "Apellido inválido";
+            }
+
+            // Validar el email
+            if (empty($email) && !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $email = false;
+                $errors['email'] = "Correo inválido";
+            }
+
+            // Validar la contraseña
+            if (empty($password)) {
+                $password = false;
+                $errors['password'] = "Contraseña inválida";
+            }
+
+            if ($name && $last_name && $email && $password && count($errors) == 0) {
                 $user = new User();
                 $user->setName($name);
                 $user->setLastName($last_name);
-                $user->setEmail($email);
+                $user->setEmail($email); 
                 $user->setPassword($password);
 
                 $save = $user->save();
             }
-
-
-            // var_dump($user);
 
             if ($save) {
                 $_SESSION['register'] = 'completed';
@@ -38,5 +61,30 @@ class UserController
             $_SESSION['register'] = 'failed';
         }
         header("Location:" . base_url . "user/register");
+    }
+
+    public function login()
+    {
+        if (isset($_POST)) {
+            // Identify user
+            // Send a query to the db
+            $user = new User;
+            $user->setEmail($_POST['email']);
+            $user->setPassword($_POST['password']);
+
+            $identity = $user->login();
+
+            if ($identity && is_object($identity)) {
+                // Create a SESSION
+                $_SESSION['identity'] = $identity;
+
+                if ($identity->role == 'admin') {
+                    $_SESSION['admin'] = true;
+                }
+            } else {
+                $_SESSION['error_login'] = 'Identificación Fallida';
+            }
+        }
+        header("Location: " . base_url);
     }
 }

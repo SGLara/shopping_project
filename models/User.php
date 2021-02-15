@@ -33,7 +33,7 @@ class User
 
     function setName($name)
     {
-        $this->name= $this->db->real_escape_string($name);
+        $this->name = $this->db->real_escape_string($name);
     }
 
     function getLastName()
@@ -43,7 +43,7 @@ class User
 
     function setLastName($last_name)
     {
-        $this->last_name =$this->db->real_escape_string($last_name);
+        $this->last_name = $this->db->real_escape_string($last_name);
     }
 
     function getEmail()
@@ -53,17 +53,17 @@ class User
 
     function setEmail($email)
     {
-        $this->email =$this->db->real_escape_string($email);
+        $this->email = $this->db->real_escape_string($email);
     }
 
     function getPassword()
     {
-        return $this->password;
+        return password_hash($this->db->real_escape_string($this->password), PASSWORD_BCRYPT, ['cost' => 4]);
     }
-
+    
     function setPassword($password)
     {
-        $this->password = password_hash($this->db->real_escape_string($password), PASSWORD_BCRYPT, ['cost' => 4]);
+        $this->password = $password; 
     }
 
     function getRole()
@@ -95,6 +95,29 @@ class User
         $result = false;
         if ($save) {
             $result = true;
+        }
+        return $result;
+    }
+
+    public function login()
+    {
+        $result = false;
+        $email = $this->email;
+        $password = $this->password;
+
+        // Check if the user exists
+        $sql = "SELECT * password FROM usuarios WHERE email = '$email';";
+        $login = $this->db->query($sql);
+
+        if ($login && $login->num_rows == 1) {
+            $user = $login->fetch_object();
+
+            // Verify password
+            $verify = password_verify($password, $user->password);
+
+            if ($verify) {
+                $result = $user;
+            }
         }
         return $result;
     }
