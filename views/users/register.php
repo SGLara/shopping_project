@@ -15,7 +15,7 @@
     <input type="text" name="last_name" required>
 
     <label for="email">Email:</label>
-    <input type="text" name="email" required>
+    <input type="email" name="email" required>
 
     <label for="password">Contraseña:</label>
     <input type="password" name="password" required>

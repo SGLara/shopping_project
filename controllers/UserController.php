@@ -19,26 +19,34 @@ class UserController
             // Validate info
             $errors = array();
 
-            if (empty($name) && is_numeric($name) && preg_match("/[0-9]/", $name)) {
-                $name = false;
+            if (!empty($name) && !is_numeric($name) && !preg_match("/[0-9]/", $name)) {
+                $name_validated = true;
+            } else {
+                $name_validated = false;
                 $errors['name'] = "Nombre inválido";
             }
 
             // Validar apellidos
-            if (empty($last_name) && is_numeric($last_name) && preg_match("/[0-9]/", $last_name)) {
-                $last_name = false;
+            if (!empty($last_name) && !is_numeric($last_name) && !preg_match("/[0-9]/", $last_name)) {
+                $last_name_validated = true;
+            } else {
+                $last_name_validated = false;
                 $errors['last_name'] = "Apellido inválido";
             }
 
             // Validar el email
-            if (empty($email) && !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                $email = false;
+            if (!empty($email) && filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $email_validated = true;
+            } else {
+                $email_validated = false;
                 $errors['email'] = "Correo inválido";
             }
 
             // Validar la contraseña
-            if (empty($password)) {
-                $password = false;
+            if (!empty($password)) {
+                $password_validated = true;
+            } else {
+                $password_validated = false;
                 $errors['password'] = "Contraseña inválida";
             }
 
@@ -46,7 +54,7 @@ class UserController
                 $user = new User();
                 $user->setName($name);
                 $user->setLastName($last_name);
-                $user->setEmail($email); 
+                $user->setEmail($email);
                 $user->setPassword($password);
 
                 $save = $user->save();
