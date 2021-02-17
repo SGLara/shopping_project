@@ -73,7 +73,7 @@ class UserController
 
     public function login()
     {
-        if (isset($_POST)) {
+        if (isset($_POST) && !empty($_POST)) {
             // Identify user
             // Send a query to the db
             $user = new User;
@@ -92,7 +92,21 @@ class UserController
             } else {
                 $_SESSION['error_login'] = 'Identificación Fallida';
             }
+        } else {
+            $_SESSION['error_login'] = 'Campos vacios, por favor ingrese datos';
+            header("Location: " . base_url);
         }
+        header("Location: " . base_url);
+    }
+
+    public function logout()
+    {
+        if (isset($_SESSION['identity'])) {
+            unset($_SESSION['identity']);
+        } elseif (isset($_SESSION['admin'])) {
+            unset($_SESSION['admin']);
+        }
+
         header("Location: " . base_url);
     }
 }

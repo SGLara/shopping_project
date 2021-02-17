@@ -106,7 +106,7 @@ class User
         $password = $this->password;
 
         // Check if the user exists
-        $sql = "SELECT * password FROM usuarios WHERE email = '$email';";
+        $sql = "SELECT * FROM usuarios WHERE email = '$email';";
         $login = $this->db->query($sql);
 
         if ($login && $login->num_rows == 1) {
