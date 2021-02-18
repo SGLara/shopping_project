@@ -223,6 +223,12 @@ button,
     }
 }
 
+.button-small {
+    width: 120px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
 label,
 input[type="button"],
 input[type="submit"],
@@ -292,4 +298,15 @@ footer {
 
 .alert_red {
     color: red;
+}
+
+table {
+    border: 1px solid $gray5;
+    width: 100%;
+    text-align: center;
+
+    td {
+        border-top: 1px solid #cccccc;
+        padding: 2px;
+    }
 }
