@@ -37,6 +37,11 @@ class Category
         return $this->db->query("SELECT * FROM categorias ORDER BY id DESC;");
     }
 
+    public function getSix()
+    {
+        return $this->db->query("SELECT * FROM categorias ORDER BY id DESC LIMIT 6;");
+    }
+
     public function save()
     {
         $sql = "INSERT INTO categorias VALUES(NULL,'{$this->getName()}');";

@@ -20,4 +20,13 @@ class Helpers
             return true;
         }
     }
+
+    public static function showCategory()
+    {
+        require_once 'models/Category.php';
+        $category = new Category;
+        $categories = $category->getSix();
+
+        return $categories;
+    }
 }
