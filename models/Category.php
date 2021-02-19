@@ -28,7 +28,8 @@ class Category
 
     function setName($name)
     {
-        $this->name = $this->db->real_escape_string($name);
+        $newName = $this->db->real_escape_string($name);
+        $this->name = trim(ucwords($newName));
     }
 
     public function getAll()

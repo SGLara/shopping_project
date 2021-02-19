@@ -33,7 +33,8 @@ class User
 
     function setName($name)
     {
-        $this->name = $this->db->real_escape_string($name);
+        $newName = $this->db->real_escape_string($name);
+        $this->name = trim(ucwords($newName));
     }
 
     function getLastName()
@@ -43,7 +44,8 @@ class User
 
     function setLastName($last_name)
     {
-        $this->last_name = $this->db->real_escape_string($last_name);
+        $lastName = $this->db->real_escape_string($last_name);
+        $this->last_name = trim(ucwords($lastName));
     }
 
     function getEmail()
