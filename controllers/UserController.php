@@ -62,6 +62,8 @@ class UserController
 
             if ($save) {
                 $_SESSION['register'] = 'completed';
+                $this->login();
+                die();
             } else {
                 $_SESSION['register'] = 'failed';
             }
@@ -107,6 +109,7 @@ class UserController
             unset($_SESSION['admin']);
         }
 
+        session_destroy();
         header("Location: " . base_url);
     }
 }

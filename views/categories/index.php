@@ -22,7 +22,7 @@
 <!-- STYLES -->
 <style>
     .button-small {
-        width: 120px;
+        width: 200px;
         text-align: center;
         margin-bottom: 20px;
     }

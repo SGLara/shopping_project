@@ -21,9 +21,14 @@ class CategoryController
     public function save()
     {
         Helpers::isAdmin();
-        // if (isset($_POST)) {
-        //     $newCategory = new Category;
-        //     $newCategory->setName($_POST['name']);
-        // }
+
+        // Save Category
+        if (isset($_POST)) {
+            $newCategory = new Category;
+            $newCategory->setName($_POST['name']);
+            $newCategory->save();
+        }
+
+        header("Location:" . base_url . "category/index");
     }
 }
