@@ -110,7 +110,6 @@ class Product
 
     public function getAll()
     {
-        $products = $this->db->query("SELECT * FROM productos ORDER BY id DESC;");
-        return $products;
+        return $this->db->query("SELECT * FROM productos ORDER BY id DESC;");
     }
 }

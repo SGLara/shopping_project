@@ -12,9 +12,9 @@ class ProductController
     {
         Helpers::isAdmin();
 
-        $product = new Product;
-        $product->getAll();
-        
+        $products = new Product;
+        $result = $products->getAll();
+
         require_once 'views/products/handle.php';
     }
 }
