@@ -19,7 +19,7 @@
         </header>
 
         <!-- MENU -->
-        <?php $categories = Helpers::showCategory(); ?>
+        <?php $categories = Helpers::showLastSixCategories(); ?>
         <nav class="menu">
             <ul>
                 <li><a href="<?= base_url ?>">Inicio</a></li>

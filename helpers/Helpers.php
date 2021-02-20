@@ -21,11 +21,20 @@ class Helpers
         }
     }
 
-    public static function showCategory()
+    public static function showLastSixCategories()
     {
         require_once 'models/Category.php';
         $category = new Category;
         $categories = $category->getSix();
+
+        return $categories;
+    }
+
+    public static function showCategories()
+    {
+        require_once 'models/Category.php';
+        $category = new Category;
+        $categories = $category->getAll();
 
         return $categories;
     }

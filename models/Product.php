@@ -45,7 +45,7 @@ class Product
 
     function setName($name)
     {
-        $this->name = $name;
+        $this->name = $this->db->real_escape_string($name);
     }
 
     function getDescription()
@@ -55,7 +55,7 @@ class Product
 
     function setDescription($description)
     {
-        $this->description = $description;
+        $this->description = $this->db->real_escape_string($description);
     }
 
     function getPrice()
@@ -65,7 +65,7 @@ class Product
 
     function setPrice($price)
     {
-        $this->price = $price;
+        $this->price = $this->db->real_escape_string($price);
     }
 
     function getStock()
@@ -75,7 +75,7 @@ class Product
 
     function setStock($stock)
     {
-        $this->stock = $stock;
+        $this->stock = $this->db->real_escape_string($stock);
     }
 
     function getOffer()
@@ -85,7 +85,7 @@ class Product
 
     function setOffer($offer)
     {
-        $this->offer = $offer;
+        $this->offer = $this->db->real_escape_string($offer);
     }
 
     function getDate()
@@ -111,5 +111,21 @@ class Product
     public function getAll()
     {
         return $this->db->query("SELECT * FROM productos ORDER BY id DESC;");
+    }
+
+    public function save()
+    {
+        $sql = "INSERT INTO productos VALUES(null, {$this->getCategoryId()}, '{$this->getName()}', 
+        '{$this->getDescription()}', {$this->getPrice()},{$this->getStock()}, null, CURDATE(),
+        null);";
+
+        $save = $this->db->query($sql);
+
+        $result = false;
+        if ($save) {
+            $result = true;
+        }
+
+        return $result;
     }
 }
