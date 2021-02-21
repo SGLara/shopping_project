@@ -50,14 +50,23 @@ class ProductController
                 $newProduct->setPrice($price);
                 $newProduct->setStock($stock);
                 $newProduct->setCategoryId($categoryId);
-                // $newProduct->setImage($image);
 
                 //SAVE IMAGE
                 $file = $_FILES['image'];
                 $filename = $file['name'];
                 $mimetype = $file['type'];
 
-                if
+                if (
+                    $mimetype == 'image/jpg' || $mimetype == 'image/jpeg' ||
+                    $mimetype == 'image/png' || $mimetype == 'image/gif'
+                ) {
+                    if (!is_dir('uploads/images')) {
+                        mkdir('uploads/images', 0777, true);
+                    }
+
+                    $newProduct->setImage($filename);
+                    move_uploaded_file($file['tmp_name'], 'uploads/images/' . $filename);
+                }
 
                 $save = $newProduct->save();
 

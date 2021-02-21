@@ -8,7 +8,7 @@
         <textarea name="description"></textarea>
 
         <label for="price">Precio</label>
-        <input type="text" name="price" required>
+        <input type="number" name="price" required>
 
         <label for="stock">Stock</label>
         <input type="number" name="stock" required>
