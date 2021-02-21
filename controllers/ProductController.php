@@ -30,12 +30,18 @@ class ProductController
 
         // Save Product
         if (isset($_POST)) {
-            $name = isset($_POST['name']) ? $_POST['name'] : false;
-            $description = isset($_POST['description']) ? $_POST['description'] : false;
-            $price = isset($_POST['price']) ? $_POST['price'] : false;
-            $stock = isset($_POST['stock']) ? $_POST['stock'] : false;
-            $categoryId = isset($_POST['category']) ? $_POST['category'] : false;
-            // $image = isset($_POST['image']) ? $_POST['image'] : false;
+            /**
+             * I am using the NULL COALESCING OPERATOR
+             * 
+             * I can also do
+             * $name = isset($_POST['name']) ? $_POST['name'] : false;
+             */
+            $name = $_POST['name'] ?? false;
+            $description = $_POST['description'] ?? false;
+            $price = $_POST['price'] ?? false;
+            $stock = $_POST['stock'] ?? false;
+            $categoryId = $_POST['category'] ?? false;
+            // $image = $_POST['image']) ? $_POST['image'] : false;
 
             if ($name && $description && $price && $stock && $categoryId) {
                 $newProduct = new Product;
@@ -45,6 +51,13 @@ class ProductController
                 $newProduct->setStock($stock);
                 $newProduct->setCategoryId($categoryId);
                 // $newProduct->setImage($image);
+
+                //SAVE IMAGE
+                $file = $_FILES['image'];
+                $filename = $file['name'];
+                $mimetype = $file['type'];
+
+                if
 
                 $save = $newProduct->save();
 

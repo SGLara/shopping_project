@@ -11,10 +11,10 @@ class UserController
     public function save()
     {
         if (isset($_POST)) {
-            $name = isset($_POST['name']) ? $_POST['name'] : false;
-            $last_name = isset($_POST['last_name']) ? $_POST['last_name'] : false;
-            $email = isset($_POST['email']) ? $_POST['email'] : false;
-            $password = isset($_POST['password']) ? $_POST['password'] : false;
+            $name = $_POST['name'] ?? false;
+            $last_name = $_POST['last_name'] ?? false;
+            $email = $_POST['email'] ?? false;
+            $password = $_POST['password'] ?? false;
 
             // Validate info
             $errors = array();

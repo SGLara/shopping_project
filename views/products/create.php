@@ -1,6 +1,6 @@
 <h1>Crear Nuevo Producto</h1>
 <div class="form_container">
-    <form action="<?= base_url ?>product/save" method="POST">
+    <form action="<?= base_url ?>product/save" method="POST" enctype="multipart/form-data">
         <label for="name">Nombre</label>
         <input type="text" name="name" required>
 
@@ -26,8 +26,8 @@
 
         </select>
 
-        <!-- <label for="image">Imagen</label>
-        <input type="file" name="image" required> -->
+        <label for="image">Imagen</label>
+        <input type="file" name="image" required>
 
         <input type="submit" value="Guardar">
         <a href="<?= base_url ?>product/handle" style="background: gray; text-decoration:none; color:white; padding: 2px; margin-top:3px;">Cancelar</a>
