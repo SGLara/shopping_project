@@ -17,6 +17,7 @@
         <th>NOMBRE</th>
         <th>PRECIO</th>
         <th>STOCK</th>
+        <th>ACCIONES</th>
     </tr>
     <?php while ($pro = $result->fetch_object()) : ?>
         <tr>
@@ -24,6 +25,10 @@
             <td><?= $pro->nombre ?></td>
             <td><?= $pro->precio ?></td>
             <td><?= $pro->stock ?></td>
+            <td>
+                <a href="<?= base_url ?>product/edit" class="button button-handle">Editar</a>
+                <a href="<?= base_url ?>product/delete?id=<?= $pro->id ?>" class="button button-handle button-red">Eliminar</a>
+            </td>
         </tr>
     <?php endwhile; ?>
 </table>

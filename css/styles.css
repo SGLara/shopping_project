@@ -203,6 +203,19 @@ button,
   margin-bottom: 20px;
 }
 
+.button-handle {
+  margin: 5px 0px;
+}
+
+.button-red {
+  background: red;
+  border: 1px solid #cf1717;
+  transition: all 200ms;
+}
+.button-red:hover {
+  background-color: #790000;
+}
+
 label,
 input[type=button],
 input[type=submit],

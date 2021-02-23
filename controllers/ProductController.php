@@ -41,7 +41,6 @@ class ProductController
             $price = $_POST['price'] ?? false;
             $stock = $_POST['stock'] ?? false;
             $categoryId = $_POST['category'] ?? false;
-            // $image = $_POST['image']) ? $_POST['image'] : false;
 
             if ($name && $description && $price && $stock && $categoryId) {
                 $newProduct = new Product;
@@ -83,5 +82,13 @@ class ProductController
         }
 
         header("Location:" . base_url . "product/handle");
+    }
+
+    public function edit(){
+        
+    }
+
+    public function delete(){
+
     }
 }
