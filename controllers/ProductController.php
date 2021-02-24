@@ -84,11 +84,39 @@ class ProductController
         header("Location:" . base_url . "product/handle");
     }
 
-    public function edit(){
-        
+    public function edit()
+    {
+        Helpers::isAdmin();
+        if (isset($_GET['id'])) {
+            $edit = true;
+            $product = new Product;
+            $product->setId($_GET['id']);
+            $pro = $product->getOne();
+
+            require_once 'views/products/create.php';
+        } else {
+            header("Location:" . base_url . "product/handle");
+        }
     }
 
-    public function delete(){
+    public function delete()
+    {
+        Helpers::isAdmin();
 
+        if (isset($_GET['id'])) {
+            $product = new Product;
+            $product->setId($_GET['id']);
+            $deleted = $product->delete();
+
+            if ($deleted) {
+                $_SESSION['deleted'] = 'success';
+            } else {
+                $_SESSION['deleted'] = 'failed';
+            }
+        } else {
+            $_SESSION['deleted'] = 'failed';
+        }
+
+        header("Location:" . base_url . "product/handle");
     }
 }

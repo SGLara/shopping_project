@@ -113,6 +113,12 @@ class Product
         return $this->db->query("SELECT * FROM productos ORDER BY id DESC;");
     }
 
+    public function getOne()
+    {
+        $product = $this->db->query("SELECT * FROM productos WHERE id = {$this->getId()};");
+        return $product->fetch_object();
+    }
+
     public function save()
     {
         $sql = "INSERT INTO productos VALUES(null, {$this->getCategoryId()}, '{$this->getName()}', 
@@ -123,6 +129,40 @@ class Product
 
         $result = false;
         if ($save) {
+            $result = true;
+        }
+
+        return $result;
+    }
+
+    public function update()
+    {
+        $sql = "UPDATE productos 
+        SET categoria_id= {$this->category_id},
+            nombre = '{$this->name}',
+            descripcion = '{$this->description}',
+            precio = {$this->price},
+            stock = {$this->stock},
+            imagen ='{$this->image}'
+        WHERE id = {$this->id};";
+
+        $edit = $this->db->query($sql);
+
+        $result = false;
+        if ($edit) {
+            $result = true;
+        }
+
+        return $result;
+    }
+
+    public function delete()
+    {
+        $sql = "DELETE FROM productos WHERE id = {$this->id};";
+        $delete = $this->db->query($sql);
+
+        $result = false;
+        if ($delete) {
             $result = true;
         }
 

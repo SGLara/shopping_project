@@ -1,17 +1,24 @@
-<h1>Crear Nuevo Producto</h1>
+<?php if (isset($edit) && isset($pro) && is_object($pro)) : ?>
+    <h1>Editar Producto <?= $pro->nombre ?></h1>
+    <?php $url_action = base_url . "product/edit&id=" . $pro->id; ?>
+<?php else : ?>
+    <h1>Crear Nuevo Producto</h1>
+    <?php $url_action = base_url . "product/save"; ?>
+<?php endif; ?>
+
 <div class="form_container">
-    <form action="<?= base_url ?>product/save" method="POST" enctype="multipart/form-data">
+    <form action="<?= $url_action ?>" method="POST" enctype="multipart/form-data">
         <label for="name">Nombre</label>
-        <input type="text" name="name" required>
+        <input type="text" name="name" required value="<?= isset($pro) && is_object($pro) ? $pro->nombre : ''; ?>">
 
         <label for="description">Descripción</label>
-        <textarea name="description"></textarea>
+        <textarea name="description"><?= isset($pro) && is_object($pro) ? $pro->descripcion : ''; ?></textarea>
 
         <label for="price">Precio</label>
-        <input type="number" name="price" required>
+        <input type="number" name="price" required value="<?= isset($pro) && is_object($pro) ? $pro->precio : ''; ?>">
 
         <label for="stock">Stock</label>
-        <input type="number" name="stock" required>
+        <input type="number" name="stock" required value="<?= isset($pro) && is_object($pro) ? $pro->stock : ''; ?>">
 
         <label for="category">Categoria</label>
         <?php $categories = Helpers::showCategories(); ?>
@@ -19,7 +26,7 @@
             <option value="null">Seleccione una categoria</option>
 
             <?php while ($cat = $categories->fetch_object()) : ?>
-                <option value="<?= $cat->id ?>">
+                <option value="<?= $cat->id ?>" <?= isset($pro) && is_object($pro) && $cat->id == $pro->categoria_id ? 'selected' : ''; ?>>
                     <?= $cat->nombre ?>
                 </option>
             <?php endwhile; ?>
@@ -27,6 +34,9 @@
         </select>
 
         <label for="image">Imagen</label>
+        <?php if (isset($pro) && is_object($pro) && !empty($pro->imagen)) : ?>
+            <img src="<?= base_url ?>uploads/images/<?= $pro->imagen ?>">
+        <?php endif; ?>
         <input type="file" name="image" required>
 
         <input type="submit" value="Guardar">
