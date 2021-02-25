@@ -1,6 +1,6 @@
 <?php if (isset($edit) && isset($pro) && is_object($pro)) : ?>
     <h1>Editar Producto <?= $pro->nombre ?></h1>
-    <?php $url_action = base_url . "product/edit&id=" . $pro->id; ?>
+    <?php $url_action = base_url . "product/save&id=" . $pro->id; ?>
 <?php else : ?>
     <h1>Crear Nuevo Producto</h1>
     <?php $url_action = base_url . "product/save"; ?>
@@ -35,7 +35,7 @@
 
         <label for="image">Imagen</label>
         <?php if (isset($pro) && is_object($pro) && !empty($pro->imagen)) : ?>
-            <img src="<?= base_url ?>uploads/images/<?= $pro->imagen ?>">
+            <img src="<?= base_url ?>uploads/images/<?= $pro->imagen ?>" class="thumb">
         <?php endif; ?>
         <input type="file" name="image" required>
 

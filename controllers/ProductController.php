@@ -51,22 +51,28 @@ class ProductController
                 $newProduct->setCategoryId($categoryId);
 
                 //SAVE IMAGE
-                $file = $_FILES['image'];
-                $filename = $file['name'];
-                $mimetype = $file['type'];
+                if (isset($_FILES['image'])) {
+                    $file = $_FILES['image'];
+                    $filename = $file['name'];
+                    $mimetype = $file['type'];
 
-                if (
-                    $mimetype == 'image/jpg' || $mimetype == 'image/jpeg' ||
-                    $mimetype == 'image/png' || $mimetype == 'image/gif'
-                ) {
-                    if (!is_dir('uploads/images')) {
-                        mkdir('uploads/images', 0777, true);
+                    if (
+                        $mimetype == 'image/jpg' || $mimetype == 'image/jpeg' ||
+                        $mimetype == 'image/png' || $mimetype == 'image/gif'
+                    ) {
+                        if (!is_dir('uploads/images')) {
+                            mkdir('uploads/images', 0777, true);
+                        }
+
+                        $newProduct->setImage($filename);
+                        move_uploaded_file($file['tmp_name'], 'uploads/images/' . $filename);
                     }
-
-                    $newProduct->setImage($filename);
-                    move_uploaded_file($file['tmp_name'], 'uploads/images/' . $filename);
                 }
 
+                if (isset($_GET['id'])) {
+                    $newProduct->setId($_GET['id']);
+                    $save = $newProduct->edit();
+                }
                 $save = $newProduct->save();
 
                 if ($save) {

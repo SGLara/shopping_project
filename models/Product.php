@@ -135,16 +135,20 @@ class Product
         return $result;
     }
 
-    public function update()
+    public function edit()
     {
         $sql = "UPDATE productos 
-        SET categoria_id= {$this->category_id},
-            nombre = '{$this->name}',
-            descripcion = '{$this->description}',
-            precio = {$this->price},
-            stock = {$this->stock},
-            imagen ='{$this->image}'
-        WHERE id = {$this->id};";
+        SET categoria_id= {$this->getCategoryId()},
+            nombre = '{$this->getName()}',
+            descripcion = '{$this->getDescription()}',
+            precio = {$this->getPrice()},
+            stock = {$this->getStock()}";
+
+        if ($this->getImage() != null) {
+            $sql .= ", imagen = '{$this->getImage()}'";
+        }
+
+        $sql .= "WHERE id = {$this->getId()};";
 
         $edit = $this->db->query($sql);
 
