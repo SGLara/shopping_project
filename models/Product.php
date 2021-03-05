@@ -113,17 +113,24 @@ class Product
         return $this->db->query("SELECT * FROM productos ORDER BY id DESC;");
     }
 
+    public function getRandom(int $limit)
+    {
+        return $products = $this->db->query("SELECT * FROM productos ORDER BY RAND() LIMIT $limit");
+    }
+
     public function getOne()
     {
-        $product = $this->db->query("SELECT * FROM productos WHERE id = {$this->getId()};");
+        $product = $this->db->query(
+            "SELECT * FROM productos WHERE id = {$this->getId()};"
+        );
         return $product->fetch_object();
     }
 
     public function save()
     {
-        $sql = "INSERT INTO productos VALUES(null, {$this->getCategoryId()}, '{$this->getName()}', 
-        '{$this->getDescription()}', {$this->getPrice()},{$this->getStock()}, null, CURDATE(),
-        '{$this->getImage()}');";
+        $sql = "INSERT INTO productos VALUES(null, {$this->getCategoryId()}, 
+        '{$this->getName()}', '{$this->getDescription()}', {$this->getPrice()},
+        {$this->getStock()}, null, CURDATE(), '{$this->getImage()}');";
 
         $save = $this->db->query($sql);
 
