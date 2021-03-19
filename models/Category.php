@@ -37,6 +37,12 @@ class Category
         return $this->db->query("SELECT * FROM categorias ORDER BY id DESC;");
     }
 
+    public function getOne()
+    {
+        $category = $this->db->query("SELECT * FROM categorias WHERE id = {$this->getId()};");
+        return $category->fetch_object();
+    }
+
     public function getSix()
     {
         return $this->db->query("SELECT * FROM categorias ORDER BY id DESC LIMIT 6;");
