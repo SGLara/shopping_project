@@ -5,9 +5,9 @@ class ProductController
 {
     public function index()
     {
-        $product = new Product();
+        $product = new Product;
         $products = $product->getRandom(6);
-        
+
         require_once 'views/products/best.php';
     }
 
@@ -15,10 +15,22 @@ class ProductController
     {
         Helpers::isAdmin();
 
-        $products = new Product;
+        $products = new Product();
         $result = $products->getAll();
 
         require_once 'views/products/handle.php';
+    }
+
+    public function show()
+    {
+        if (isset($_GET['id'])) {
+            $id = $_GET['id'];
+
+            $product = new Product();
+            $product->setId($id);
+            $pro = $product->getOne();
+        }
+        require_once 'views/products/show.php';
     }
 
     public function create()

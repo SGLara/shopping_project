@@ -19,12 +19,12 @@ class CategoryController
             $id = $_GET['id'];
 
             //Get category
-            $category = new Category;
+            $category = new Category();
             $category->setId($id);
             $category = $category->getOne();
 
             //Get products
-            $product = new Product;
+            $product = new Product();
             $product->setCategoryId($id);
             $products = $product->getAllCategory();
         }

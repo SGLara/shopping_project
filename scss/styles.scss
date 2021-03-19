@@ -288,6 +288,14 @@ button {
     text-align: center;
     margin-bottom: 30px;
 
+    a {
+        color: black;
+        text-decoration: none;
+
+        &:hover{
+            color: $gray5;
+        }
+    }
     img {
         height: 170px;
         margin-bottom: 10px;
